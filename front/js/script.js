@@ -1,73 +1,55 @@
-fetch ("http://localhost:3000/api/products")
-.then((res) => res.json())
-.then((data) => addProducts(data))
- 
+// Récupération des products dans l'API
+fetch("http://localhost:3000/api/products")
+.then(function(reponse){
+        return reponse.json();    
+})
+.then(function(resultatAPI){
+    const products = resultatAPI;
+    console.table(products);
+for (let product in products){
 
 
-function addProducts(data){
-    //const _id = data[0]._id
-    //const imageUrl = data[0].imageUrl
-    //const altTxt = data[0].altTxt
-    //const name = data[0].name
-    //const description = data[0].description
+    //Création de la balise <a> de l'article
+    let productLink = document.createElement("a");
+    document.querySelector("#items").append(productLink);
+    productLink.href = `product.html?id=${products[product]._id}`;
 
-    data.forEach((kanap) => {
-    const {_id, imageUrl, altTxt, name, description} = kanap
-    const anchor = makeAnchor(_id)
-    const article =  document.createElement("article")
-    const image = makeImage(imageUrl, altTxt)
-    const h3 = makeH3(name)
-    const p = makeParagraph(description)
-    appendElementToArticle(article, [image, h3, p])
-    appendArticleToAnchor(anchor, article)
-
-});   
-}
-
-function appendElementToArticle(article, array){
-    array.forEach((item) => {
-        article.appendChild(item)
-    })
-    //article.appendChild(image)
-    //article.appendChild(h3)
-    //article.appendChild(p)
-
-}
-
-function makeAnchor(_id){
-    const anchor = document.createElement("a")
-    anchor.href = "./product.html?id=" + _id
-    return anchor
-
-}
-
-function appendArticleToAnchor(anchor, article) {
-    const items = document.querySelector("#items")
-    if (items != null) {
-        items.appendChild(anchor)
-        anchor.appendChild(article)
-}
-}
-
-function makeImage(imageUrl, altTxt) {
-    const image = document.createElement("img")
-    image.src = imageUrl
-    image.alt = altTxt
-    return image
-}
+    //Création de la balise <article>
+    let productArticle = document.createElement("article");
+    productLink.append(productArticle);
 
 
-function makeH3(name){
-    const h3 = document.createElement("h3")
-    h3.textContent = name
-    h3.classList.add("productName")
-    return h3
-}
+    //Création de la balise <img>
+    let productImg = document.createElement("img");
+    productArticle.append(productImg);
+    productImg.src = products[product].imageUrl;
+    productImg.alt = products[product].altTxt;
 
-function makeParagraph(description){
-    const p = document.createElement("p")
-    p.textContent = description
-    p.classList.add("productDescription")
-    return p
+    //Création de la balise <h3>
+    let productTitle = document.createElement("h3");
+    productArticle.append(productTitle);
+    productTitle.classList = "productName";
+    productTitle.innerHTML = products[product].name;
+
+
+    //Création de la balise <p> descriptive
+    let productDescription = document.createElement("p");
+    productArticle.append(productDescription);
+    productDescription.classList = "productDescription";
+    productDescription.innerHTML = products[product].description;
+
+    
+    // //Bonus ajout du prix :
+    // let productPrice = document.createElement("p");
+    // productArticle.append(productPrice);
+    // productPrice.innerHTML = `Prix : ${products[product].price} €`;
+
+
 
 }
+
+})
+
+.catch((error) => {
+    alert("Impossible de récuperer la requette sur l'API,verrifiez que le server soit bien lancé");
+})
