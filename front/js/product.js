@@ -1,7 +1,5 @@
 //Récuperation du lien
 let str = window.location.href;
-
-//Récupération de l'id dans l'url via searchParams
 let url = new URL(str);
 let id = url.searchParams.get("id");
 // console.log(id);
@@ -92,16 +90,16 @@ fetch("http://localhost:3000/api/products/" + id)
                 }
 // On informe l'utilisateur de l'ajout
 
-                alert(`Vous avez bien ajouté ${quantityChoose.value} ${products.name} ${colorChoose.value} à votre panier`);
+                alert(`Vous avez ajouté ${quantityChoose.value} ${products.name} ${colorChoose.value} à votre panier`);
 
 
 
-            } else //Informer l'utilisateur de devoir rentrer une quantité entre 0 et 100 ainsi q'une couleur
-                alert("Merci de bien vouloir selectioner une couleur ainsi q'une quantité comprise entre 1 et 100");
+            } else 
+                alert("Merci de bien vouloir choisir une couleur et une quantité");
         });
 
     })
 
-    .catch((error) => alert("Impossible de récuperer la requette sur l'API,verrifiez que le server soit bien lancé"))
+    .catch((error) => alert("Impossible de récuperer la réponse sur l'API, vérification du serveur"))
 
 

@@ -27,8 +27,7 @@ fetch (`http://localhost:3000/api/products/`)
        modifyQuantity();
        getTotals();
        deleteArticle();
-       
-  }
+    }
   
      
 })
@@ -60,7 +59,7 @@ function getCart(productList)
          let article = document.createElement("article");
          document.querySelector("#cart__items").appendChild(article);
          article.className = "cart__item";
-         article.setAttribute("data-id", productLocalStorage[product].id);
+         article.setAttribute("data_id", productLocalStorage[product].id);
 
          // Ajout de la div "cart__item__img"
          let productDiv = document.createElement("div");
@@ -232,10 +231,8 @@ function deleteArticle()
    }
 }
 
-/*******************/
 //formulaire
-/*******************/
-//je déclare contact et products je vais le remplir au fur et à mesure de la validation
+
 let contact = {
    firstName: "",
    lastName: "",
@@ -268,7 +265,7 @@ let contact = {
  
  let submit = document.querySelector("#order");
  
- ////condition avec regex et return des valeur boléennes selon condition remplie ou paspour chaque input
+ ////regex
  /////////firstName/////////
  firstName.addEventListener("input", function (e) {
    //arrête d'écouter après le résultat valide
@@ -283,12 +280,12 @@ let contact = {
    //on test la regex
    let testName = letterRegExp.test(firstName);
    if(testName){
-     //si il n'y a pas de message d'erreur valid ok
+     //pas d'erruer valide ok
      firstNameErrorMsg.textContent = "";
      valid = true;
    }else{
      //si il y a un message d'erreur valide reste false
-     firstNameErrorMsg.textContent = "le prénom doit avoir 3 lettres minimum et pas de caractère spéciaux ou chiffres merci !!!";
+     firstNameErrorMsg.textContent = "Doit contenir 3 lettres minimum sans caractères spéciaux";
      //on retourne le résultat de valid pour chaque champ
      valid = false;
    }
@@ -308,7 +305,7 @@ let contact = {
       lastNameErrorMsg.textContent = "";
      valid = true;
    }else{
-     lastNameErrorMsg.textContent = "le nom doit avoir 3 lettres minimum et pas de caractère spéciaux ou chiffres merci !!!";
+     lastNameErrorMsg.textContent = "Doit contenir 3 lettres minimum sans caractères spéciaux";
      valid = false;
    }
    return valid;
@@ -327,7 +324,7 @@ let contact = {
      addressErrorMsg.textContent = "";
      valid = true;
    }else{
-     addressErrorMsg.textContent = "merci de rentrer une adresse valide, max 50 caractères";
+     addressErrorMsg.textContent = "merci d'écrire une adresse valide";
      valid = false;
    }
    return valid;
@@ -346,7 +343,7 @@ let contact = {
      cityErrorMsg.textContent = "";
      valid = true;
    }else{
-     cityErrorMsg.textContent = "merci de rentrer le nom de votre ville ou village, pas de code postal !!! ";
+     cityErrorMsg.textContent = "merci de rentrer votre ville sans code postal";
      valid = false;
    }
    return valid;
@@ -365,7 +362,7 @@ let contact = {
      emailErrorMsg.textContent = "";
      valid = true;
    }else{
-     emailErrorMsg.textContent  = "Email non valide, il doit contenir un @ et 1 point suivi de maxixum 4 lettres, exemple toto@monmail.fr";
+     emailErrorMsg.textContent  = "Email non valide, exemple kanap@monmail.fr";
      valid = false;
    }
    return valid;
@@ -381,7 +378,7 @@ let contact = {
          letterRegExp.test(city.value) == false ||
          emailRegExp.test(email.value) == false
      ){
-       window.alert("Certains champs du formulaire sont manquants ou mal renseignés");
+       window.alert("Veuillez corriger le formulaire");
      }else if(
        firstName.value === "" ||
        lastName.value === "" ||
