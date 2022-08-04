@@ -97,11 +97,11 @@ fetch("http://localhost:3000/api/products/" + id)
 
 
             } else //Informer l'utilisateur de devoir rentrer une quantité entre 0 et 100 ainsi q'une couleur
-                alert("Merci de bien vouloir selectioner une couleur ainsi q'une quantité comprise entre 1 et 100");
+                alert("Merci de bien vouloir selectioner une couleur ainsi q'une quantité");
         });
 
     })
 
-    .catch((error) => alert("Impossible de récuperer la requette sur l'API,verrifiez que le server soit bien lancé"))
+    .catch((error) => alert("Impossible de récuperer la requette sur l'API"))
 
 
